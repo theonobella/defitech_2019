@@ -9,6 +9,9 @@
 
 library(shiny)
 
+Donnees <- read.table("data_test.csv", header = TRUE)
+
+
 # Define UI for application that draws a histogram
 shinyUI(
     source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value
