@@ -11,5 +11,6 @@ library(shiny)
 
 # Define UI for application that draws a histogram
 shinyUI(
-    source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value
+    #source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value
+    source("source/dashboard_ui.R", local=TRUE,encoding="UTF-8")$value
 )

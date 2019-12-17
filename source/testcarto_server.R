@@ -10,4 +10,4 @@
       ) %>%
       addMarkers(data = points())
   })
-
+  
