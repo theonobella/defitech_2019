@@ -11,11 +11,12 @@ dashboardPage(
   dashboardSidebar(
     # Creation d'onglets (on pourrait aussi mettre zone de recherche ou autre, voir aide)
     sidebarMenu(
-        # pour les icones voir http://fontawesome.io/icons/
-        menuItem("Carte", tabName = "carte", icon = icon("map")),
-        menuItem("Graphique", tabName = "graphique", icon = icon("bar-chart-o")),
-        menuItem("Wiki raisin", icon = icon("fab fa-wikipedia-w"), 
-                 href = "https://fr.wikipedia.org/wiki/Raisin")
+      id="sidebar",
+      # pour les icones voir http://fontawesome.io/icons/
+      menuItem("Carte", tabName = "carte", icon = icon("map")),
+      menuItem("Graphique", tabName = "graphique", icon = icon("bar-chart-o")),
+      menuItem("Wiki raisin", icon = icon("fab fa-wikipedia-w"), 
+                href = "https://fr.wikipedia.org/wiki/Raisin")
     )
   ),
   

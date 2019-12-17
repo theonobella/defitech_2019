@@ -24,11 +24,11 @@ output$map_indic <- renderLeaflet({
   
   # calcul de la carte
   pal <- colorNumeric(palette = "Reds",
-                      domain = Donnees_a_afficher[,input$idSelect_indicateur])
+                      domain = Donnees[,input$idSelect_indicateur])
   
   leaflet(Donnees_a_afficher) %>%
   addTiles() %>%
-  addCircleMarkers(~CoordX, ~CoordY, popup = ~as.character(ID), label = ~as.character(ID),
+  addCircleMarkers(~CoordX, ~CoordY, popup = ~as.character(Donnees_a_afficher[,input$idSelect_indicateur]), label = ~as.character(Donnees_a_afficher[,input$idSelect_indicateur]),
                    #radius = ~ifelse(type == "ship", 6, 10),
                    color = ~pal(Donnees_a_afficher[,input$idSelect_indicateur]),
                    stroke = FALSE, fillOpacity = 0.5
