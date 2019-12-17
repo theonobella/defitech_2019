@@ -1,6 +1,4 @@
-tabItem(
-  tabName = "carte",
-  fluidPage(
+fluidRow(
     h2("Carte de ..."), # Titre de la page
     
     # Box contenant la carte
@@ -15,6 +13,7 @@ tabItem(
     # Box de description de la carte
     box(
       background = "olive", # fond de la box en vert olive
+      width=4,
       height = "500px",
       tabBox(
         title = "Side box", # Titre de la side box
@@ -35,5 +34,4 @@ tabItem(
       )
     )
   )
-)
 

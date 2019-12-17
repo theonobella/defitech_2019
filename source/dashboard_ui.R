@@ -2,6 +2,7 @@
 ### Création du Dashboard
 
 dashboardPage(
+  skin = "red", # Couleur du dashbord
   ### Titre du dashboard
   dashboardHeader(title = "Défi technique"),
   
@@ -24,11 +25,13 @@ dashboardPage(
     # Contenu des onglets
     tabItems(
       # Contenu de l'onglet Carte
-      source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value,
+      tabItem(
+        tabName = "carte", 
+        source("source/carte_ui.R", local=TRUE,encoding="UTF-8")$value),
       # Contenu de l'onglet graphique
       tabItem(
-        tabName = "graphique"
-      )
+        tabName = "graphique",
+        source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value)
       )
     )
   )
