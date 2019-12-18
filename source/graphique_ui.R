@@ -1,15 +1,18 @@
 sidebarLayout(
   sidebarPanel(
-
+    selectInput(inputId = "idSelect_indicateur", 
+                label = "Select among the list: ", 
+                choices = names(Donnees[5:ncol(Donnees)])),
+    
     dateRangeInput(inputId = "idSelect_daterange", 
                    label = "Période d'intérêt :", 
-                   start= "2000-01-01",
-                   end=format(Sys.Date(),format="%d/%m/%Y"),
-                   language='fr',
+                   start= "01/01/2018",
+                   end=as.Date(Sys.Date(),format=("%d/%m/%Y")),
+                   format="mm/dd/yyyy",
                    separator="to")
   ),
   mainPanel(
-    plotOutput("hist")
+    plotlyOutput("plot")
   )
   
 )

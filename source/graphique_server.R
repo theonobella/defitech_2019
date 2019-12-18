@@ -1,25 +1,16 @@
 
-output$hist <- renderPlot({
+output$plot <- renderPlotly({
   
-  
-  Donnees_a_afficher = subset(
+    Donnees_a_grapher = subset(
     Donnees,
-    DateDebut == input$idSelect_daterange[0],
-    DateFin=input$idSelect_daterange[1],
-    select = c('ID', 'CoordX','CoordY', input$idSelect_indicateur))
+    Date >= input$idSelect_daterange[1] && Date <= input$idSelect_daterange[2],
+    select = c(Date, NDVI))
+  Donnees_a_grapher
+ 
+  data=aggregate( Donnees_a_grapher, by=list(Donnees_a_grapher$Date), FUN=mean)
   
-  
-  
-  # calcul de la carte
-  pal <- colorNumeric(palette = "Reds",
-                      domain = Donnees_a_afficher[,input$idSelect_indicateur])
-  
-  leaflet(Donnees_a_afficher) %>%
-    addTiles() %>%
-    addCircleMarkers(~CoordX, ~CoordY, popup = ~as.character(ID), label = ~as.character(ID),
-                     #radius = ~ifelse(type == "ship", 6, 10),
-                     color = ~pal(Donnees_a_afficher[,input$idSelect_indicateur]),
-                     stroke = FALSE, fillOpacity = 0.5
-    )
-  
+  plot_ly(data, x=~Date, y=~input$idSelect_indicateur)
+
 })
+
+
