@@ -12,6 +12,8 @@ names(r_colors) <- colors()
 # Donnees <- read.table("data_test_simon.csv", header = TRUE, dec = ",",stringsAsFactors = FALSE)
 
 
+
+
 # Données Vignoble
 donnees_raisin <- read.table("data_test_raisin.csv", header = TRUE, sep = ";", dec = ",", stringsAsFactors = FALSE)
 # donnees_vignoble$Date=as.Date(donnees_vignoble$Date,format="%d/%m/%Y")
