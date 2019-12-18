@@ -26,6 +26,7 @@ shinyServer(function(input, output, session) {
     Donnees$Date=as.Date(Donnees$Date,format="%d/%m/%Y")
     Donnees
   })
+  dta <- Donnees()
 
     #source("source/testcarto_server.R", local=TRUE,encoding="UTF-8")$value
     # source("source/dashboard_server.R", local=TRUE,encoding="UTF-8")$value
