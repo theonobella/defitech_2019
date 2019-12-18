@@ -13,12 +13,20 @@ dashboardPage(
     sidebarMenu(
       id="sidebar",
       # pour les icones voir http://fontawesome.io/icons/
-      menuItem("Carte", tabName = "carte", icon = icon("map")),
-      menuItem("Graphique", tabName = "graphique", icon = icon("bar-chart-o")),
-      menuItem("GraphiquePlotly", tabName = "graphiquePlotly", icon = icon("bar-chart-o")),
+      menuItem("Carte", tabName = "carte", icon = icon("map"), startExpanded = TRUE),
+      menuItem("Graphiques", tabName = "graphique", icon = icon("bar-chart-o"),
+               menuSubItem("Spectres", tabName = "spectres", icon = icon("chart-area")),
+               menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-scatter"))
+               ),
       menuItem("Wiki raisin", icon = icon("fab fa-wikipedia-w"), 
-                href = "https://fr.wikipedia.org/wiki/Raisin"),
-      menuItem("Spectres", tabName ="spectre", icon = icon("chart-area"))
+                href = "https://fr.wikipedia.org/wiki/Raisin"
+               ),
+      selectInput(
+        inputId = "id_select_espece",
+        label = "Selectionner l'espèce",
+        choices = c("Raisin", "Pomme"),
+        multiple = FALSE
+        )
     )
   ),
   
@@ -27,22 +35,28 @@ dashboardPage(
   dashboardBody(
     # Contenu des onglets
     tabItems(
+      
       # Contenu de l'onglet Carte
       tabItem(
-        tabName = "carte", 
-        source("source/carte_ui.R", local=TRUE,encoding="UTF-8")$value),
-      # Contenu de l'onglet graphique
-      tabItem(
-        tabName = "graphique",
-        source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value),
-      # Contenu de l'onglet graphique avec plotly
-      tabItem(
-        tabName = "graphiquePlotly",
-        source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value), 
-      # Contenu de l'onglet spectre
-      tabItem(
-        tabName = "spectre",
-        source("source/spectre_ui.R", local=TRUE,encoding="UTF-8")$value)
+        tabName = "carte",
+        source("source/carte_ui.R", local=TRUE,encoding="UTF-8")$value
+        )#,
+      #   # Contenu du sous onglet "vignoble" dans l'onglet "Carte"
+      # tabItem(
+      #   tabName = "vignoble",
+      #   source("source/carte_vignoble_ui.R", local=TRUE, encoding="UTF-8")$value
+      #   ),
+      # 
+      # # Contenu de l'onglet graphique
+      # tabItem(
+      #   tabName = "graphique",
+      #   source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value
+      #   ),
+      # # Contenu de l'onglet graphique avec plotly
+      # tabItem(
+      #   tabName = "graphiquePlotly",
+      #   source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value
+      #   )
       )
     )
   )

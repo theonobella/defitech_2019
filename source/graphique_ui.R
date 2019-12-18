@@ -1,6 +1,6 @@
 sidebarLayout(
   sidebarPanel(
-    selectInput(inputId = "idSelect_indicateurgraph", 
+    selectInput(inputId = "idSelect_indicateur", 
                 label = "Select among the list: ", 
                 choices = names(Donnees[5:ncol(Donnees)])),
     
@@ -8,8 +8,8 @@ sidebarLayout(
                    label = "Période d'intérêt :", 
                    start= "01/01/2018",
                    end=as.Date(Sys.Date(),format=("%d/%m/%Y")),
-                   format="dd/mm/yyyy",
-                   separator="à")
+                   format="mm/dd/yyyy",
+                   separator="to")
   ),
   mainPanel(
     plotlyOutput("plot")
