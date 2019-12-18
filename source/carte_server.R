@@ -1,6 +1,25 @@
 
 
 
+# Gnerate selcet input
+output$mapInputInd <- renderUI({
+  # browser()
+  dta <- Donnees()
+  selectInput(inputId = "idSelect_indicateur", 
+              label = "Select among the list: ",
+              choices = names(dta[5:ncol(dta)]))
+})
+output$mapInputDate <- renderUI({
+  # browser()
+  dta <- Donnees()
+  selectInput(inputId = "idSelect_date", 
+              label = "Select among the list: ",
+              choices = dta$Date)
+})
+
+
+
+
 # Représentation de l'onde 410nm pour tous les capteurs
 # pal <- colorNumeric(palette = "Reds",domain = Donnees_a_afficher[input$idSelect_indicateur])
 #
@@ -10,28 +29,28 @@
 
 output$map_indic <- renderLeaflet({
   # browser()
-  
+
   # extraction des données
   # Donnees_a_afficher <- Donnees_a_afficher[Donnees$Date == input$idSelect_date, c('ID', 'CoordX','CoordY', input$idSelect_indicateur) ]
-  
-  
+
+
   Donnees_a_afficher = subset(
-    Donnees,
+    Donnees(),
     Date == input$idSelect_date,
     select = c('ID', 'CoordX', 'CoordY', input$idSelect_indicateur)
   )
-  
-  
-  
+
+
+
   # calcul de la carte
   pal <- colorNumeric(palette = "Reds",
-                      domain = Donnees[, input$idSelect_indicateur])
-  
+                      domain = Donnees()[, input$idSelect_indicateur])
+
   leaflet(Donnees_a_afficher) %>%
     addTiles() %>%
     addLegend(
       title = input$idSelect_indicateur,
-      values = Donnees[, input$idSelect_indicateur],
+      values = Donnees()[, input$idSelect_indicateur],
       pal = pal,
       opacity = 0.9,
       position = "bottomright"
@@ -46,5 +65,5 @@ output$map_indic <- renderLeaflet({
       stroke = FALSE,
       fillOpacity = 0.5
     )
-  
+
 })
