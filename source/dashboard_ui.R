@@ -17,7 +17,8 @@ dashboardPage(
       menuItem("Graphique", tabName = "graphique", icon = icon("bar-chart-o")),
       menuItem("GraphiquePlotly", tabName = "graphiquePlotly", icon = icon("bar-chart-o")),
       menuItem("Wiki raisin", icon = icon("fab fa-wikipedia-w"), 
-                href = "https://fr.wikipedia.org/wiki/Raisin")
+                href = "https://fr.wikipedia.org/wiki/Raisin"),
+      menuItem("Spectres", tabName ="spectre", icon = icon("chart-area"))
     )
   ),
   
@@ -37,7 +38,11 @@ dashboardPage(
       # Contenu de l'onglet graphique avec plotly
       tabItem(
         tabName = "graphiquePlotly",
-        source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value)
+        source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value), 
+      # Contenu de l'onglet spectre
+      tabItem(
+        tabName = "spectre",
+        source("source/spectre_ui.R", local=TRUE,encoding="UTF-8")$value)
       )
     )
   )
