@@ -13,8 +13,8 @@ dashboardPage(
     sidebarMenu(
       id="sidebar",
       # pour les icones voir http://fontawesome.io/icons/
-      menuItem(" ", tabName = "carte", icon = icon("map"), startExpanded = TRUE),
-      menuItem(" ", tabName = "graphique", icon = icon("bar-chart-o"),
+      menuItem("Carte", tabName = "carte", icon = icon("map"), startExpanded = TRUE),
+      menuItem("Graphiques", tabName = "graphique", icon = icon("bar-chart-o"),
                menuSubItem("Spectres", tabName = "spectres", icon = icon("chart-area")),
                menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-scatter"))
                ),
@@ -40,23 +40,23 @@ dashboardPage(
       tabItem(
         tabName = "carte",
         source("source/carte_ui.R", local=TRUE,encoding="UTF-8")$value
-        ),
-        # Contenu du sous onglet "vignoble" dans l'onglet "Carte"
-      tabItem(
-        tabName = "vignoble",
-        source("source/carte_vignoble_ui.R", local=TRUE, encoding="UTF-8")$value
-        ),
-      
-      # Contenu de l'onglet graphique
-      tabItem(
-        tabName = "graphique",
-        source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value
-        ),
-      # Contenu de l'onglet graphique avec plotly
-      tabItem(
-        tabName = "graphiquePlotly",
-        source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value
-        )
+        )#,
+      #   # Contenu du sous onglet "vignoble" dans l'onglet "Carte"
+      # tabItem(
+      #   tabName = "vignoble",
+      #   source("source/carte_vignoble_ui.R", local=TRUE, encoding="UTF-8")$value
+      #   ),
+      # 
+      # # Contenu de l'onglet graphique
+      # tabItem(
+      #   tabName = "graphique",
+      #   source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value
+      #   ),
+      # # Contenu de l'onglet graphique avec plotly
+      # tabItem(
+      #   tabName = "graphiquePlotly",
+      #   source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value
+      #   )
       )
     )
   )
