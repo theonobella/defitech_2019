@@ -1,17 +1,26 @@
 output$plot_spectre <- renderPlotly({
   
-  x <- colnames(Donnees_pomme[8:23])
+  #browser()
+  
+  #data_spectre=aggregate(Donnees_pomme, by=list(Point_mesure = Donnees_pomme$Point_mesure, Variete=Donnees_pomme$Variete), FUN=mean)
+  # data_spectre=aggregate(Donnees_pomme, by=list(Point_mesure = Donnees_pomme$Variete, Variete=Donnees_pomme$Point_mesure), FUN=mean)
+  data_spectre=aggregate(Donnees_pomme, by=list(Variete=Donnees_pomme$Variete), FUN=mean)
   
   
-   Donnees_pomme_sub = subset(
-     Donnees_pomme,
-     Date = input$idSelect_date_spectre,
-     select = c(Point_mesure, Donnees_pomme[8:23]))
-   Donnees_pomme_sub
+  library(tidyverse)
+  dta <- data_spectre
   
-  data_spectre=aggregate(Donnees_pomme_sub, by=list(Donnees_pomme_sub$Point_mesure), FUN=mean)
+  newDta <- pivot_longer(dta, cols = 8:25, names_to = "waveLength")
+  dim(dta)
+  dim(newDta)
   
-  plot_ly(data_spectre, x=~x, y=~input$idSelect_date_spectre)
+  newDta$waveLength <- as.numeric(gsub("\\D","", newDta$waveLength))
   
+  plot_ly(data = newDta,
+          type = "scatter",
+          mode ="markers + lines",
+          x = ~waveLength,
+          y = ~value,
+          name = ~Variete)
 })
   
