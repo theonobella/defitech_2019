@@ -12,7 +12,7 @@ output$specInputDate <- renderUI({
 
 output$plot_spectre <- renderPlotly({
   
-  browser()
+  #browser()
   
   # dta_s <- Donnees()
   # dta_s$Date=as.Date(dta_s$Date,format="%d/%m/%Y")
@@ -44,6 +44,6 @@ output$plot_spectre <- renderPlotly({
           mode ="markers + lines",
           x = ~waveLength,
           y = ~value,
-          name = ~Variete)
+          name = ~Point_mesure)
 })
   
