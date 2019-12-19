@@ -1,11 +1,9 @@
 
 sidebarLayout(
   sidebarPanel(
-    
-    uiOutput("ISIG"),
-  
+    uiOutput("GrRai")
   ),
   mainPanel(
-    plotlyOutput("plot")
+    plotlyOutput("plotRaisins")
   )
 )
