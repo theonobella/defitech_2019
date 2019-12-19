@@ -1,12 +1,12 @@
 
-require(sf)  
-require(stars)
-require(gstat) 
+
 
 datacapteur <- read.csv("./Data_project/data_calibr.csv", sep = ";", dec = ",")
 datacapteur$NDVI <- (datacapteur[,18]-datacapteur[,13]) / (datacapteur[,18]+datacapteur[,13])
 
-
+require(sf)  
+require(stars)
+require(gstat) 
 krigeage <- function(datacapteur){
   
   mydata <- st_as_sf(datacapteur, coords = c("CoordX", "CoordY"))

@@ -7,7 +7,8 @@ sidebarLayout(
   uiOutput("mapInputParcelle")
   ),
   mainPanel(
-    leafletOutput("map_indic")
+    leafletOutput("map_indic"),
+    leafletOutput("mapplotkrigeage")
   )
 
 )
