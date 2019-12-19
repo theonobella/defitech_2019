@@ -18,7 +18,8 @@ output$mapInputDate <- renderUI({
   selectInput(inputId = "idSelect_date", 
               label = "Date : ",
               choices = data$Date,
-              selected = TRUE
+              selected = TRUE,
+              width = '50%'
               )
 })
 output$mapInputVariete <- renderUI({
