@@ -40,14 +40,15 @@ output$plot_spectre <- renderPlotly({
   newDta$waveLength <- as.numeric(gsub("\\D","", newDta$waveLength))
   
   library("RColorBrewer")
-  browser()
+  #browser()
   plot_ly(data = newDta,
           type = "scatter",
           mode ="markers + lines",
           x = ~waveLength,
           y = ~value,
           name = ~Point_mesure,
-          colors = brewer.pal(n = 5, name = 'BrBG')
+          color = ~as.character(Point_mesure),
+          colors = brewer.pal(n = 28, name = 'YlGnBu')
           )
 })
   
