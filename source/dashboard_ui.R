@@ -40,7 +40,14 @@ dashboardPage(
       tabItem(
         tabName = "carte",
         source("source/carte_ui.R", local=TRUE,encoding="UTF-8")$value
+        ),
+      
+      # Contenu du sous onglet "spectre" dans l'onglet "Carte"
+      tabItem(
+        tabName = "spectres",
+        source("source/spectre_ui.R", local=TRUE,encoding="UTF-8")$value
         )#,
+      
       #   # Contenu du sous onglet "vignoble" dans l'onglet "Carte"
       # tabItem(
       #   tabName = "vignoble",

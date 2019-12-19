@@ -4,6 +4,7 @@ library(shiny)
 library(leaflet)
 library(shinydashboard)
 library(plotly)
+library(tidyverse)
 
 r_colors <- rgb(t(col2rgb(colors()) / 255))
 names(r_colors) <- colors()
