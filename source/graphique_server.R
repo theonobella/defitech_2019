@@ -1,7 +1,7 @@
 
 # Gnerate selcet input
 output$ISIG <- renderUI({
-  browser()
+  
   
   dta <- Donnees()
   
