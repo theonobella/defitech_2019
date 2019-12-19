@@ -60,8 +60,7 @@ output$plotRaisins <- renderPlotly({
  
   DonneesSelection <- dta[lignes, colonnes] 
   
-  if (input$idAffichParDateOuInd =="Boxplot par variete et par date") 
-  {
+  if (input$idAffichParDateOuInd =="Boxplot par variete et par date") {
 
     # boxplot
     
@@ -70,17 +69,21 @@ output$plotRaisins <- renderPlotly({
                  color = DonneesSelection$Variete,
                  type = "box") %>%
       layout(boxmode = "group")
-    
+    # p1 <- plot_ly(x = ~DonneesSelection$Date, 
+    #              y = ~DonneesSelection[, input$idSelectIndGR], 
+    #              #color = ~DonneesSelection$Variete,
+    #              type = "box") %>%
+    #   layout(boxmode = "group")
     p1
-  }
+  } else {
   
-  if (input$idAffichParDateOuInd =="Indicateur moyen par variete")
-  { 
-    #Moyenne indicateur des lignes selectionnées par date. Faire une fonction if pour faire par indiv (avec input)
+
+    #Moyenne indicateur des lignes selectionnées par date.
     donneesMoyDateVar=aggregate( DonneesSelection, 
                                  by=list(Dates=DonneesSelection$Date, Varietes=DonneesSelection$Variete), FUN=mean)
     
     # graph
+  
     p2 <- ggplot(donneesMoyDateVar, 
                  aes(x = Dates, 
                      y = donneesMoyDateVar[, input$idSelectIndGR], color = Varietes)) +  
