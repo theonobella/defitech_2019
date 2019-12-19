@@ -23,24 +23,24 @@ output$GrRai <- renderUI({
                    separator="à"),
 
     #Creation des cases à cocher variete
-    checkboxGroupInput(inputId = "idCheckVarietes", label = "Please select", selected = nbreCategoriesVar,
+    checkboxGroupInput(inputId = "idCheckVarietes", label = "Selectionnez une ou plusieurs varietes", selected=categoriesVar[1],
                        choices = categoriesVar),
 
     #Creation des cases à cocher parcelle
-    checkboxGroupInput(inputId = "idCheckParcelles", label = "Please select", selected = nbreCategoriesPar,
+    checkboxGroupInput(inputId = "idCheckParcelles", label = "Selectionnez une ou plusieurs parcelles", selected=categoriesPar[1],
                        choices = categoriesPar),
 
 
     #Selection des différents indicateurs
     selectInput(inputId = "idSelectIndGR",
-                label = "Select among the list: ",
+                label = "Selectionnez l'indicateur à afficher ",
                 choices = c("Couleur","Fermete")),
 
     #Selection de l'indicateur moyen par date ou de l'indicateur par individu
     selectInput(inputId = "idAffichParDateOuInd",
-                label = "Select among the list: ",
-                choices = c("Indicateur moyen par date",
-                            "Indicateur par individu"))
+                label = "Selectionnez le graphique ",
+                choices = c("Boxplot par variete et par date",
+                            "Indicateur moyen par variete"))
   )
   
 })
@@ -51,30 +51,41 @@ output$GrRai <- renderUI({
 output$plotRaisins <- renderPlotly({
   
   dta <- Donnees()
-  browser()
-   
-  # Selection lignes et colonnes
-  lignes -> dta$Date >= input$idDateIntervalle[1] & dta$Date <= input$idDateIntervalle[2] & dta$Parcelle == input$idCheckParcelles & dta$Variete==input$idCheckVarietes
   
-  colonnes -> c("Date",input$idSelectIndGR)
+  # Selection lignes et colonnes
+  lignes <- dta$Date >= input$idDateIntervalle[1] & dta$Date <= input$idDateIntervalle[2] & 
+    dta$Parcelle %in% input$idCheckParcelles & dta$Variete %in% input$idCheckVarietes
+  
+  colonnes <- c("Date","Variete",input$idSelectIndGR)
  
   DonneesSelection <- dta[lignes, colonnes] 
   
-  if (input$idAffichParDateOuInd =="Indicateur moyen par date") 
+  if (input$idAffichParDateOuInd =="Boxplot par variete et par date") 
   {
-    #Moyenne indicateur des lignes selectionnées par date. Faire une fonction if pour faire par indiv (avec input)
-    donneesMoyDate=aggregate( DonneesSelection, by=list(DonneesSelection$Date), FUN=mean)
-    # build graph with ggplot syntax 
-    p <- ggplot(donneesMoyDate, aes_string(x = donneesMoyDate$Date, y = input$idSelectIndGR)) +  
-      geom_point() 
-    ggplotly(p) 
+
+    # boxplot
+    
+    p1 <- plot_ly(x = DonneesSelection$Date,
+                 y = DonneesSelection[, input$idSelectIndGR],
+                 color = DonneesSelection$Variete,
+                 type = "box") %>%
+      layout(boxmode = "group")
+    
+    p1
   }
   
-  if (input$idAffichParDateOuInd =="Indicateur par individu")
-  { # build graph with ggplot syntax 
-    p <- ggplot(DonneesSelection, aes_string(x = DonneesSelection$Date, y = input$idSelectIndGR)) +  
+  if (input$idAffichParDateOuInd =="Indicateur moyen par variete")
+  { 
+    #Moyenne indicateur des lignes selectionnées par date. Faire une fonction if pour faire par indiv (avec input)
+    donneesMoyDateVar=aggregate( DonneesSelection, 
+                                 by=list(Dates=DonneesSelection$Date, Varietes=DonneesSelection$Variete), FUN=mean)
+    
+    # graph
+    p2 <- ggplot(donneesMoyDateVar, 
+                 aes(x = Dates, 
+                     y = donneesMoyDateVar[, input$idSelectIndGR], color = Varietes)) +  
     geom_point() 
-    ggplotly(p) 
+    p2
   }
   
 })
