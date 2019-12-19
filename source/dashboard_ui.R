@@ -16,16 +16,15 @@ dashboardPage(
       menuItem("Carte", tabName = "carte", icon = icon("map"), startExpanded = TRUE),
       menuItem("Graphiques", tabName = "graphique", icon = icon("bar-chart-o"),
                menuSubItem("Spectres", tabName = "spectres", icon = icon("chart-area")),
-               menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-scatter"))
+               menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-line"))
                ),
       menuItem("Wiki raisin", icon = icon("fab fa-wikipedia-w"), 
                 href = "https://fr.wikipedia.org/wiki/Raisin"
                ),
-      selectInput(
+      radioGroupButtons(
         inputId = "id_select_espece",
-        label = "Selectionner l'espèce",
         choices = c("Raisin", "Pomme"),
-        multiple = FALSE
+        justified = TRUE
         )
     )
   ),
