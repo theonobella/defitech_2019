@@ -9,7 +9,7 @@ sidebarLayout(
                    separator="à"),
     
     #Selection des différentes catégories dans variete
-    categoriesVar <- unique(Donnees$Variete),
+    categoriesVar <- unique(dta$Variete),
     nbreCategoriesVar <- length(categoriesVar),
     
     #Creation des cases à cocher variete
@@ -18,7 +18,7 @@ sidebarLayout(
     
     
     #Selection des différentes catégories dans parcelle
-    categoriesPar <- unique(Donnees$Parcelle),
+    categoriesPar <- unique(dta$Parcelle),
     nbreCategoriesPar <- length(categoriesPar),
     
     #Creation des cases à cocher parcelle
@@ -29,7 +29,13 @@ sidebarLayout(
     #Selection des différents indicateurs
     selectInput(inputId = "idSelectIndGR", 
                 label = "Select among the list: ", 
-                choices = c("couleur","fermete"))
+                choices = c("couleur","fermete")),
+    
+    #Selection de l'indicateur moyen par date ou de l'indicateur par individu
+    selectInput(inputId = "idAffichParDateOuInd", 
+                label = "Select among the list: ", 
+                choices = c("Indicateur moyen par date",
+                            "Indicateur par individu"))
   ),
   mainPanel(
     plotlyOutput("plotRaisins")

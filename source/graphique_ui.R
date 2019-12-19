@@ -1,8 +1,8 @@
 sidebarLayout(
   sidebarPanel(
-    selectInput(inputId = "idSelect_indicateur", 
+    selectInput(inputId = "idSelect_indicateurgraph", 
                 label = "Select among the list: ", 
-                choices = names(Donnees[5:ncol(Donnees)])),
+                choices = names(dta[5:ncol(Donnees)])),
     
     dateRangeInput(inputId = "idSelect_daterange", 
                    label = "Période d'intérêt :", 
