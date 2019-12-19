@@ -23,7 +23,7 @@ shinyServer(function(input, output, session) {
     else{
       Donnees = donnees_pomme
     }
-    Donnees$Date=as.Date(Donnees$Date,format="%d/%m/%Y")
+    Donnees$Date=as.Date.character(Donnees$Date,format="%d/%m/%Y")
     Donnees
   })
 

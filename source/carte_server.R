@@ -1,46 +1,74 @@
 
 
 
-# Gnerate selcet input
+# Generation des boutons
 output$mapInputInd <- renderUI({
+  
   # browser()
-  dta <- Donnees()
-  selectInput(inputId = "idSelect_indicateur", 
-              label = "Select among the list: ",
-              choices = names(dta[5:ncol(dta)]))
+  data <- Donnees() # Pour éviter l'écriture avec les parenthèses
+  radioGroupButtons(inputId = "idSelect_indicateur", 
+              label = "Indicateur : ",
+              choices = names(data[26:27]),
+              selected = "Couleur"
+              )
 })
 output$mapInputDate <- renderUI({
   # browser()
-  dta <- Donnees()
+  data <- Donnees()
   selectInput(inputId = "idSelect_date", 
-              label = "Select among the list: ",
-              choices = dta$Date)
+              label = "Date : ",
+              choices = data$Date,
+              selected = TRUE
+              )
+})
+output$mapInputVariete <- renderUI({
+  # browser()
+  data <- Donnees()
+  radioGroupButtons(inputId = "idSelect_variete",
+              label = "Variété : ",
+              choices = unique(data$Variete),
+              selected = data[1,"Variete"]
+  )
 })
 
-
-
-
-# Représentation de l'onde 410nm pour tous les capteurs
-# pal <- colorNumeric(palette = "Reds",domain = Donnees_a_afficher[input$idSelect_indicateur])
-#
-# m <-
-#
-# m
+output$mapInputParcelle <- renderUI({
+  # browser()
+  data <- Donnees()
+  checkboxGroupButtons(inputId = "idSelect_parcelle",
+              label = "Parcelle(s) : ",
+              choices = unique(data$Parcelle),
+              selected = data[1,"Parcelle"],
+              checkIcon = list(
+                yes = tags$i(class = "fa fa-check-square", 
+                             style = "color: steelblue"),
+                no = tags$i(class = "fa fa-square-o", 
+                            style = "color: steelblue"))
+  )
+})
 
 output$map_indic <- renderLeaflet({
   # browser()
-
-  # extraction des données
-  # Donnees_a_afficher <- Donnees_a_afficher[Donnees$Date == input$idSelect_date, c('ID', 'CoordX','CoordY', input$idSelect_indicateur) ]
-
-
-  Donnees_a_afficher = subset(
+  
+  # on sélectionne les lignes correspondant à la date choisie
+  Donnees_a_afficher_date = subset(
     Donnees(),
     Date == input$idSelect_date,
+    select = c('ID', 'CoordX', 'CoordY', 'Variete', 'Parcelle', input$idSelect_indicateur)
+  )
+  
+  # on sélectionne les lignes correspondant à la variété choisie 
+  Donnees_a_afficher_variete = subset(
+    Donnees_a_afficher_date,
+    Variete == input$idSelect_variete,
+    select = c('ID', 'CoordX', 'CoordY','Parcelle', input$idSelect_indicateur)
+  )
+  
+  # on sélectionne les lignes correspondant à la parcelle choisie 
+  Donnees_a_afficher = subset(
+    Donnees_a_afficher_variete,
+    Parcelle %in% input$idSelect_parcelle,
     select = c('ID', 'CoordX', 'CoordY', input$idSelect_indicateur)
   )
-
-
 
   # calcul de la carte
   pal <- colorNumeric(palette = "Reds",
@@ -52,7 +80,7 @@ output$map_indic <- renderLeaflet({
       title = input$idSelect_indicateur,
       values = Donnees()[, input$idSelect_indicateur],
       pal = pal,
-      opacity = 0.9,
+      opacity = 0.95,
       position = "bottomright"
     ) %>%
     addCircleMarkers(
