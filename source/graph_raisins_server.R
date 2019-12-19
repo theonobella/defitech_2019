@@ -1,3 +1,4 @@
+  colonnes -> input$idSelectIndGR
 
 # Gnerate selcet input
 output$GrRai <- renderUI({
