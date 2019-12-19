@@ -18,8 +18,7 @@ dashboardPage(
                menuSubItem("Spectres", tabName = "spectres", icon = icon("chart-area")),
                menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-line"))
                ),
-      menuItem("Wiki raisin", icon = icon("fab fa-wikipedia-w"), 
-                href = "https://fr.wikipedia.org/wiki/Raisin"
+      menuItem("Wiki", tabName="wiki", icon = icon("fab fa-wikipedia-w")
                ),
       radioGroupButtons(
         inputId = "id_select_espece",
@@ -45,7 +44,13 @@ dashboardPage(
       tabItem(
         tabName = "spectres",
         source("source/spectre_ui.R", local=TRUE,encoding="UTF-8")$value
-        )#,
+        ),
+      
+      # Contenu de l'onglet Wiki
+      tabItem(
+        tabName = "wiki",
+        source("source/wiki_ui.R", local=TRUE,encoding="UTF-8")$value
+      )#,
       
       #   # Contenu du sous onglet "vignoble" dans l'onglet "Carte"
       # tabItem(
