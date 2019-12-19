@@ -16,7 +16,9 @@ dashboardPage(
       menuItem("Carte", tabName = "carte", icon = icon("map"), startExpanded = TRUE),
       menuItem("Graphiques", tabName = "graphique", icon = icon("bar-chart-o"),
                menuSubItem("Spectres", tabName = "spectres", icon = icon("chart-area")),
-               menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-scatter"))
+               menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-scatter")),
+               menuSubItem("GraphPlotly", tabName = "GraphPlotly", icon = icon("chart-scatter")),
+               menuSubItem("GraphRaisins (select donnees raisin, tmp)", tabName = "GraphRaisins", icon = icon("chart-scatter"))
                ),
       menuItem("Wiki raisin", icon = icon("fab fa-wikipedia-w"), 
                 href = "https://fr.wikipedia.org/wiki/Raisin"
@@ -40,7 +42,7 @@ dashboardPage(
       tabItem(
         tabName = "carte",
         source("source/carte_ui.R", local=TRUE,encoding="UTF-8")$value
-        )#,
+        ),
       #   # Contenu du sous onglet "vignoble" dans l'onglet "Carte"
       # tabItem(
       #   tabName = "vignoble",
@@ -52,11 +54,16 @@ dashboardPage(
       #   tabName = "graphique",
       #   source("source/testcarto_ui.R", local=TRUE,encoding="UTF-8")$value
       #   ),
-      # # Contenu de l'onglet graphique avec plotly
-      # tabItem(
-      #   tabName = "graphiquePlotly",
-      #   source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value
-      #   )
+      # Contenu de l'onglet graphique avec plotly
+      tabItem(
+        tabName = "GraphPlotly",
+        source("source/graphique_ui.R", local=TRUE,encoding="UTF-8")$value
+      ),
+      # Contenu de l'onglet graphique avec raisins
+      tabItem(
+        tabName = "GraphRaisins",
+        source("source/graph_raisins_ui.R", local=TRUE,encoding="UTF-8")$value
+      )
       )
     )
   )

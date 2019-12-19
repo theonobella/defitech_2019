@@ -26,7 +26,7 @@ shinyServer(function(input, output, session) {
     Donnees$Date=as.Date(Donnees$Date,format="%d/%m/%Y")
     Donnees
   })
-  dta <- Donnees()
+  
 
     #source("source/testcarto_server.R", local=TRUE,encoding="UTF-8")$value
     # source("source/dashboard_server.R", local=TRUE,encoding="UTF-8")$value
@@ -34,7 +34,12 @@ shinyServer(function(input, output, session) {
   # 
   # source("source/testcarto_server.R", local=TRUE,encoding="UTF-8")$value
   # 
-  # source("source/graphique_server.R", local=TRUE,encoding="UTF-8")$value
+  
+  #Graph plotly
+  source("source/graphique_server.R", local=TRUE,encoding="UTF-8")$value
+  
+  #Graph raisins
+  source("source/graph_raisins_server.R", local=TRUE,encoding="UTF-8")$value
   # 
   # 
   # # Sous-onglet vignoble de l'onglet "Carte"

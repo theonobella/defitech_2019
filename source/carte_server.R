@@ -4,14 +4,14 @@
 # Gnerate selcet input
 output$mapInputInd <- renderUI({
   # browser()
-  
+  dta <- Donnees()
   selectInput(inputId = "idSelect_indicateur", 
               label = "Select among the list: ",
               choices = names(dta[5:ncol(dta)]))
 })
 output$mapInputDate <- renderUI({
   # browser()
-
+  dta <- Donnees()
   selectInput(inputId = "idSelect_date", 
               label = "Select among the list: ",
               choices = dta$Date)
