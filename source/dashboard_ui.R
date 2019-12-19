@@ -17,7 +17,7 @@ dashboardPage(
       menuItem("Graphiques", tabName = "graphique", icon = icon("bar-chart-o"),
                menuSubItem("Spectres", tabName = "spectres", icon = icon("chart-area")),
                menuSubItem("GraphPlotly", tabName = "GraphPlotly", icon = icon("chart-scatter")),
-               menuSubItem("GraphRaisins (select donnees raisin, tmp)", tabName = "GraphRaisins", icon = icon("chart-scatter"))
+               menuSubItem("GraphRaisins (select donnees raisin, tmp)", tabName = "GraphRaisins", icon = icon("chart-scatter")),
                menuSubItem("Indicateurs", tabName = "indicateurs", icon = icon("chart-line"))
                ),
       menuItem("Wiki", tabName="wiki", icon = icon("fab fa-wikipedia-w")
@@ -52,7 +52,7 @@ dashboardPage(
       tabItem(
         tabName = "wiki",
         source("source/wiki_ui.R", local=TRUE,encoding="UTF-8")$value
-      )#,
+      ),#,
       
       #   # Contenu du sous onglet "vignoble" dans l'onglet "Carte"
       # tabItem(
